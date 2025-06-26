@@ -52,8 +52,6 @@ mysql -u your_username -p airbnb_clone < schema.sql
 - Replace `your_username` with your MySQL username.  
 - Enter your MySQL password when prompted.
 
----
-
 ### ✅ Step 3: Verify Tables
 
 After the script runs successfully, verify the created tables:
@@ -64,11 +62,8 @@ DESCRIBE User;
 DESCRIBE Property;
 -- etc.
 ```
-
 You should see all six tables:
-
 `User`, `Property`, `Booking`, `Payment`, `Review`, and `Message`.
-
 
 ---
 
