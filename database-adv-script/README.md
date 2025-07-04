@@ -35,45 +35,56 @@ This file includes SQL queries demonstrating different types of **JOINs** to ext
   psql -U your_user -d your_database -f joins_queries.sql
   ```
 
+
 ---
 
 ## 📁 File: `subqueries.sql`
 
 ### Description
-This script contains **advanced SQL queries** that use subqueries to extract more specific, calculated, or conditional results from the Airbnb-like schema.
+
+This script contains **advanced SQL queries** that demonstrate the use of both correlated and non-correlated subqueries within the Airbnb-like database schema.
 
 ### Included Queries
 
 1. ### ⭐ Properties with Average Rating > 4.0
-   - Uses a **scalar subquery** to calculate the average rating for each property.
-   - Filters for properties with an average rating strictly greater than 4.0.
-   - Useful for showcasing high-performing listings on the platform.
+
+   * Uses a **non-correlated subquery** with `GROUP BY` and `HAVING` to calculate the average rating per property.
+   * Filters properties whose average review rating exceeds 4.0.
+   * Ideal for showcasing top-rated listings.
 
 2. ### 👤 Users with More Than 3 Bookings
-   - Uses a **correlated subquery** to count how many bookings each user has made.
-   - Filters for users who have made **more than three** bookings.
-   - Ideal for identifying power users or frequent travelers.
+
+   * Uses a **correlated subquery** that counts the number of bookings per user.
+   * Filters users who have made more than three bookings.
+   * Useful for identifying frequent users or loyal customers.
 
 ---
 
 ## 🛠️ How to Use
 
-- Run the file using a PostgreSQL client such as:
-  ```bash
+* Run the file in a PostgreSQL-compatible environment using a command-line client such as:
+
+  ```
   psql -U your_username -d your_database -f subqueries.sql
   ```
+
+* Make sure the `Property`, `Review`, `User`, and `Booking` tables exist and are populated with sample data for meaningful results.
 
 ---
 
 ### 🧠 Notes on Subqueries
 
-- A **correlated subquery** depends on a value from the outer query and runs once per row. Example: counting bookings per user.
-- A **non-correlated subquery** runs independently and can often be optimized. Example: computing average property ratings.
+* A **correlated subquery** refers to columns from the outer query and is evaluated once per outer row.
+  Example: `SELECT COUNT(*) FROM Booking WHERE Booking.user_id = User.user_id`
 
-These patterns are important in analytics, filtering, and performance-aware query design.
+* A **non-correlated subquery** is independent of the outer query and often used in `IN`, `EXISTS`, or `HAVING` clauses.
+  Example: `SELECT property_id FROM Review GROUP BY property_id HAVING AVG(rating) > 4.0`
 
+Understanding the differences between these two types is essential for writing optimized and readable SQL queries, especially in reporting and analytics contexts.
 
 ---
+
+
 
 ## 📁 File: `aggregations_and_window_functions.sql`
 
