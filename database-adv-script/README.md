@@ -83,14 +83,17 @@ This script contains SQL queries that demonstrate how to use **aggregation funct
 ### Included Queries
 
 1. ### 📊 Total Bookings per User
-   - Uses `COUNT()` with `GROUP BY` to find how many bookings each user has made.
-   - Includes user details like first and last name.
-   - Uses `LEFT JOIN` to show users even if they have made no bookings.
+   - Uses `COUNT()` with `GROUP BY` to get how many bookings each user has made.
+   - Includes `first_name` and `last_name` for context.
+   - Uses `LEFT JOIN` so users with no bookings are still included.
 
-2. ### 🏆 Property Booking Rank
-   - Uses a window function (`RANK() OVER (...)`) to assign a rank to each property based on how many bookings it has received.
-   - Useful for leaderboard-style analytics or highlighting popular listings.
-   - Ties receive the same rank (as opposed to `ROW_NUMBER`, which is always unique).
+2. ### 🏆 Property Ranking with `ROW_NUMBER()`, `RANK()`, and `DENSE_RANK()`
+   - Calculates total bookings for each property using `COUNT()`.
+   - Ranks properties using three different window functions:
+     - `ROW_NUMBER()` – always gives a unique sequential number
+     - `RANK()` – same rank for ties, skips next numbers
+     - `DENSE_RANK()` – same rank for ties, does **not** skip numbers
+   - Great for building leaderboards, pagination, and comparison of rank styles.
 
 ---
 
@@ -107,6 +110,15 @@ This script contains SQL queries that demonstrate how to use **aggregation funct
 
 - PostgreSQL requires all selected non-aggregated columns to be listed in the `GROUP BY` clause.
 - Window functions allow you to perform ranking and row-based calculations **without reducing row count**, unlike aggregation.
+- All window functions are applied **without reducing rows** — they let you keep full property detail.
+- These queries can be wrapped into views for use in analytics dashboards.
 
 These queries are ideal for dashboards, leaderboards, user engagement stats, and more.
+
+---
+
+
+
+
+
 
