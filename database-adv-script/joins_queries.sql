@@ -28,7 +28,8 @@ SELECT
     r.comment,
     r.created_at AS review_created_at
 FROM Property p
-LEFT JOIN Review r ON p.property_id = r.property_id;
+LEFT JOIN Review r ON p.property_id = r.property_id
+ORDER BY p.name ASC, r.rating DESC;
 
 -- ===============================================
 -- 3. FULL OUTER JOIN: Retrieve all users and all bookings,
