@@ -72,3 +72,41 @@ This script contains **advanced SQL queries** that use subqueries to extract mor
 
 These patterns are important in analytics, filtering, and performance-aware query design.
 
+
+---
+
+## 📁 File: `aggregations_and_window_functions.sql`
+
+### Description
+This script contains SQL queries that demonstrate how to use **aggregation functions** and **window functions** for analysis and reporting in the Airbnb-style database.
+
+### Included Queries
+
+1. ### 📊 Total Bookings per User
+   - Uses `COUNT()` with `GROUP BY` to find how many bookings each user has made.
+   - Includes user details like first and last name.
+   - Uses `LEFT JOIN` to show users even if they have made no bookings.
+
+2. ### 🏆 Property Booking Rank
+   - Uses a window function (`RANK() OVER (...)`) to assign a rank to each property based on how many bookings it has received.
+   - Useful for leaderboard-style analytics or highlighting popular listings.
+   - Ties receive the same rank (as opposed to `ROW_NUMBER`, which is always unique).
+
+---
+
+## 🛠️ How to Use
+
+- Run the file using a PostgreSQL client such as:
+  ```bash
+  psql -U your_username -d your_database -f aggregations_and_window_functions.sql
+  ```
+
+---
+
+### ✅ Notes
+
+- PostgreSQL requires all selected non-aggregated columns to be listed in the `GROUP BY` clause.
+- Window functions allow you to perform ranking and row-based calculations **without reducing row count**, unlike aggregation.
+
+These queries are ideal for dashboards, leaderboards, user engagement stats, and more.
+
